@@ -2,7 +2,7 @@ import { Config } from "style-dictionary";
 import { TransformedToken } from "style-dictionary";
 
 export const config: Config = {
-  source: ["src/properties"],
+  source: ["src/tokens"],
   platforms: {
     css: {
       transformGroup: "css",
