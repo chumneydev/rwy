@@ -1,0 +1,11 @@
+{
+  "name": "rwy",
+  "version": "0.0.1",
+  "description": "Rwy is a modular css framework built for Chumney & Associates, and is heavily inspired by Tailwind CSS.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Louis Stephens",
+  "license": "ISC"
+}
