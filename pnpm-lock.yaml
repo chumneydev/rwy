@@ -11,7 +11,7 @@ importers:
   framework/ui/base:
     dependencies:
       '@rwy/props':
-        specifier: workspace:^0.0.1
+        specifier: workspace:^
         version: link:../../../props
     devDependencies:
       '@types/node':

@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@rwy/props": "workspace:^0.0.1"
+    "@rwy/props": "workspace:^"
   },
   "devDependencies": {
     "@types/node": "^20.3.1",
