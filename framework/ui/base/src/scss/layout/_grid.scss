@@ -1,0 +1,44 @@
+@use "../abstracts/defaults" as columns;
+@use "@rwy/props/scss/props-breakpoint" as breakpoint;
+
+$tokens-column-breakpoint: map-get(breakpoint.$tokens, "breakpoint");
+
+.grid {
+  display: grid;
+}
+
+// Default columns 1 - 12
+@each $name, $value in columns.$columns {
+  .grid-cols-#{$value} {
+    grid-template-columns: repeat(#{$value}, 1fr);
+  }
+}
+
+// Specific columns
+@each $name, $value in columns.$columns {
+  .col-span-#{$name} {
+    grid-column: span $value / span $value;
+  }
+}
+
+// Media queries => columns
+@each $prefix, $size in $tokens-column-breakpoint {
+  @media screen and (min-width: $size) {
+    @each $name, $value in columns.$columns {
+      .#{$prefix}\:grid-cols-#{$value} {
+        grid-template-columns: repeat($value, 1fr);
+      }
+    }
+  }
+}
+
+// Media queries => col span
+@each $prefix, $size in $tokens-column-breakpoint {
+  @media screen and (min-width: $size) {
+    @each $name, $value in columns.$columns {
+      .#{$prefix}\:col-span-#{$value} {
+        grid-column: span $value / span $value;
+      }
+    }
+  }
+}
