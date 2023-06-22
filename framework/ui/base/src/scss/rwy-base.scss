@@ -1,0 +1,43 @@
+@use "spacing";
+@use "layout";
+@use "colors";
+
+// ! Dev only: Remove for production
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// :where(#dev) {
+//   --dev-color-white: #ffffff;
+//   --dev-color-black: #000000;
+//   --dev-color-red: #ef4444;
+//   --dev-color-orange: #f97316;
+//   --dev-color-yellow: #eab308;
+//   --dev-color-green: #22c55e;
+//   --dev-color-emerald: #10b981;
+//   --dev-color-sky: #0ea5e9;
+//   --dev-color-purple: #a855f7;
+//   --dev-color-rose: #f43f5e;
+// }
+
+body {
+}
+
+// #dev {
+//   font-family: Arial, Helvetica, sans-serif;
+// }
+
+// .one {
+//   color: var(--dev-color-white);
+//   background-color: var(--dev-color-red);
+// }
+// .two {
+//   color: var(--dev-color-white);
+//   background-color: var(--dev-color-orange);
+// }
+// .three {
+//   color: var(--dev-color-white);
+//   background-color: var(--dev-color-yellow);
+// }
