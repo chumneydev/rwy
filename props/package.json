@@ -1,0 +1,19 @@
+{
+  "name": "@rwy/props",
+  "version": "0.0.1",
+  "description": "Creates tokens for use in RWY projects via style-dictionary",
+  "main": "index.js",
+  "scripts": {
+    "props:build": "tsx src/build/main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Louis Stephens",
+  "license": "ISC",
+  "devDependencies": {
+    "postcss": "^8.4.24",
+    "style-dictionary": "^3.8.0",
+    "tsx": "^3.12.7",
+    "typescript": "^5.1.3"
+  }
+}
