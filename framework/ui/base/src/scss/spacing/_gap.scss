@@ -1,0 +1,13 @@
+@use "../abstracts/functions" as *;
+@use "@rwy/props/scss/props-spacing" as *;
+
+$tokens-gap: map-get($tokens, "spacing", "gap");
+
+@each $class, $value in $tokens-gap {
+  // Escape the dot in the class name
+  $class: str-replace($class, ".", "\\.");
+
+  .gap-#{$class} {
+    gap: $value;
+  }
+}

@@ -1,0 +1,52 @@
+@use "@rwy/props/scss/props-color" as color;
+
+$tokens-color-base: map-get(color.$tokens, "color", "base");
+$tokens-color-brand: map-get(color.$tokens, "color", "brand");
+
+@debug $tokens-color-base;
+
+@each $name, $value in $tokens-color-base {
+  @if (type-of($value) != map) {
+    .text-#{$name} {
+      --text-color: #{$value};
+      color: var(--text-color);
+    }
+  } @else {
+    @each $shade, $color in $value {
+      @if ($shade == "default") {
+        .text-#{$name} {
+          --text-color: #{$color};
+          color: var(--text-color);
+        }
+      } @else {
+        .text-#{$name}-#{$shade} {
+          --text-color: #{$color};
+          color: var(--text-color);
+        }
+      }
+    }
+  }
+}
+
+@each $name, $value in $tokens-color-brand {
+  @if (type-of($value) != map) {
+    .text-#{$name} {
+      --text-color: #{$value};
+      color: var(--text-color);
+    }
+  } @else {
+    @each $shade, $color in $value {
+      @if ($shade == "default") {
+        .text-#{$name} {
+          --text-color: #{$color};
+          color: var(--text-color);
+        }
+      } @else {
+        .text-#{$name}-#{$shade} {
+          --text-color: #{$color};
+          color: var(--text-color);
+        }
+      }
+    }
+  }
+}

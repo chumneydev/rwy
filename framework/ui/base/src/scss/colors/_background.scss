@@ -1,0 +1,50 @@
+@use "@rwy/props/scss/props-color" as color;
+
+$tokens-background-base: map-get(color.$tokens, "color", "base");
+$tokens-background-brand: map-get(color.$tokens, "color", "brand");
+
+@each $name, $value in $tokens-background-base {
+  @if (type-of($value) != map) {
+    .bg-#{$name} {
+      --bg-color: #{$value};
+      background-color: var(--bg-color);
+    }
+  } @else {
+    @each $shade, $color in $value {
+      @if ($shade == "default") {
+        .bg-#{$name} {
+          --bg-color: #{$color};
+          background-color: var(--bg-color);
+        }
+      } @else {
+        .bg-#{$name}-#{$shade} {
+          --bg-color: #{$color};
+          background-color: var(--bg-color);
+        }
+      }
+    }
+  }
+}
+
+@each $name, $value in $tokens-background-brand {
+  @if (type-of($value) != map) {
+    .bg-#{$name} {
+      --bg-color: #{$value};
+      background-color: var(--bg-color);
+    }
+  } @else {
+    @each $shade, $color in $value {
+      @if ($shade == "default") {
+        .bg-#{$name} {
+          --bg-color: #{$color};
+          background-color: var(--bg-color);
+        }
+      } @else {
+        .bg-#{$name}-#{$shade} {
+          --bg-color: #{$color};
+          background-color: var(--bg-color);
+        }
+      }
+    }
+  }
+}

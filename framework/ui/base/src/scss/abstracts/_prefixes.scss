@@ -1,0 +1,41 @@
+$prefixes-margin: (
+  "mt": "margin-top",
+  "mr": "margin-right",
+  "mb": "margin-bottom",
+  "ml": "margin-left",
+  "mx": (
+    "margin-left",
+    "margin-right",
+  ),
+  "my": (
+    "margin-top",
+    "margin-bottom",
+  ),
+  "m": (
+    "margin-top",
+    "margin-right",
+    "margin-bottom",
+    "margin-left",
+  ),
+);
+
+$prefixes-padding: (
+  "pt": "padding-top",
+  "pr": "padding-right",
+  "pb": "padding-bottom",
+  "pl": "padding-left",
+  "px": (
+    "padding-left",
+    "padding-right",
+  ),
+  "py": (
+    "padding-top",
+    "padding-bottom",
+  ),
+  "p": (
+    "padding-top",
+    "padding-right",
+    "padding-bottom",
+    "padding-left",
+  ),
+);
