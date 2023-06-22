@@ -1,0 +1,33 @@
+@use "../abstracts/prefixes" as *;
+@use "../abstracts/functions" as *;
+@use "@rwy/props/scss/props-spacing" as *;
+
+$tokens-padding: map-get($tokens, "spacing", "padding");
+
+@each $prefix, $property in $prefixes-padding {
+  @each $class, $value in $tokens-padding {
+    // Escape the dot in the class name
+    $class: str-replace($class, ".", "\\.");
+
+    @if type-of($property) == "list" {
+      $combinedProperties: ();
+      @each $item in $property {
+        $combinedProperties: map-merge(
+          $combinedProperties,
+          (
+            $item: $value,
+          )
+        );
+      }
+      .#{$prefix}-#{$class} {
+        @each $prop, $val in $combinedProperties {
+          #{$prop}: $val;
+        }
+      }
+    } @else {
+      .#{$prefix}-#{$class} {
+        #{$property}: $value;
+      }
+    }
+  }
+}
