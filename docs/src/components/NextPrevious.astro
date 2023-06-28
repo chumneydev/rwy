@@ -1,0 +1,77 @@
+---
+import type { CollectionEntry } from "astro:content";
+export interface Props {
+  categories: CollectionEntry<"categories">[];
+  docs: CollectionEntry<"docs">[];
+  currentDoc: CollectionEntry<"docs">;
+}
+
+const { categories, docs, currentDoc } = Astro.props;
+
+categories.sort((a, b) => a.data.order - b.data.order);
+
+const groupDocsByCategory = categories.map((category) => ({
+  ...category,
+  docs: docs.filter((doc) => doc.data.category.id === category.id).sort((a, b) => a.data.order - b.data.order),
+}));
+
+// console.log(groupDocsByCategory);
+
+const sortedDocs = groupDocsByCategory.flatMap((category) => category.docs);
+
+const currentDocIndex = sortedDocs.findIndex((doc) => doc.slug === currentDoc.slug);
+const prevDoc = currentDocIndex > 0 ? sortedDocs[currentDocIndex - 1] : null;
+const nextDoc = currentDocIndex < sortedDocs.length - 1 ? sortedDocs[currentDocIndex + 1] : null;
+
+// Need to get the previous docs category title
+const prevDocCategory = categories.find((category) => category.id === prevDoc?.data.category.id);
+const nextDocCategory = categories.find((category) => category.id === nextDoc?.data.category.id);
+
+// console.log(prevDocCategory);
+---
+
+<div class="mt-8 flex justify-between gap-12 bg-emerald-500 p-4 text-base">
+  {
+    prevDoc && (
+      <a class="group flex items-center hover:text-slate-900" href={`/docs/${prevDoc.slug}`}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="mr-5 h-3 w-auto text-slate-700 group-hover:text-slate-700"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+        </svg>
+        {prevDoc.data.title}
+      </a>
+    )
+  }
+  {
+    nextDoc && (
+      <a class="group flex items-center hover:text-slate-900" href={`/docs/${nextDoc.slug}`}>
+        {nextDoc.data.title}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="ml-5 h-3 w-auto text-slate-700 group-hover:text-slate-700"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+        </svg>
+      </a>
+    )
+  }
+</div>
+
+<style>
+  .previous-doc {
+    @apply flex-1 bg-yellow-500 p-4;
+  }
+  .next-doc {
+    @apply flex-1 bg-yellow-500 p-4;
+  }
+</style>
