@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  categories: CollectionEntry<"categories">[];
+  docs: CollectionEntry<"docs">[];
+  currentPage: string;
+}
+
+const { categories, docs, currentPage } = Astro.props;
+
+categories.sort((a, b) => a.data.order - b.data.order);
+
+const groupDocsByCategory = categories.map((category) => ({
+  ...category,
+  docs: docs.filter((doc) => doc.data.category.id === category.id).sort((a, b) => a.data.order - b.data.order),
+}));
+---
+
+<nav class="sticky top-24 grid gap-4">
+  {
+    groupDocsByCategory.map((category) => (
+      <div class="grid gap-2">
+        <h5 class="font-bold tracking-wide">{category.data.title}</h5>
+        <ul>
+          {category.docs.map((doc) => (
+            <li>
+              <a
+                href={`/docs/${doc.slug}`}
+                data-current-page={doc.slug === currentPage ? "true" : "false"}
+                class="side-nav -ml-px block border-l border-slate-200 pl-4 hover:border-sky-500 hover:text-sky-500 data-[current-page=true]:border-sky-500 data-[current-page=true]:text-sky-500  data-[current-page=true]:hover:border-sky-500"
+              >
+                {doc.data.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</nav>
+
+<style>
+  /* a:where(.side-nav) {
+    @apply -ml-px block border-l border-slate-200 pl-4  hover:border-sky-500;
+  } */
+  /* a:where([data-current-page="false"]) {
+    @apply -ml-px block border-l border-slate-200 pl-4;
+  } */
+  a:where([data-current-page="true"]) {
+    @apply -ml-px block border-l border-sky-500 border-transparent pl-4 hover:border-sky-500;
+  }
+</style>
