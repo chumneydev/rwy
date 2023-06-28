@@ -1,0 +1,67 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { MarkdownHeading } from "astro";
+
+// Components
+import SidebarNavigation from "@components/SidebarNavigation.astro";
+import ThemeSwitcher from "@components/ThemeSwitcher";
+import ActiveToC from "@components/ActiveToC";
+import NextPrevious from "@components/NextPrevious.astro";
+
+export interface Props {
+  title: string;
+  doc: CollectionEntry<"docs">;
+  docs: CollectionEntry<"docs">[];
+  categories: CollectionEntry<"categories">[];
+  currentPage: string;
+  headings: MarkdownHeading[];
+}
+
+const { title, doc, docs, categories, headings, currentPage } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-white-50 relative">
+    <header class="sticky top-0 z-10 flex justify-center border-b border-slate-200 bg-white">
+      <div class="flex w-full max-w-8xl items-center py-4">
+        <h1>Rwy ui</h1>
+        <div class="ml-auto flex">
+          <nav class="flex">
+            <ul>
+              <li><a href="#">Docs</a></li>
+            </ul>
+          </nav>
+          <div class="ml-6 flex border-l border-slate-200 pl-6">
+            <ThemeSwitcher client:only />
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="mx-auto flex max-w-8xl justify-between">
+      <aside class="relative w-64 flex-none lg:w-72">
+        <div class="absolute inset-y-0 right-0 w-[50vw] bg-slate-50"></div>
+
+        <SidebarNavigation categories={categories} docs={docs} currentPage={currentPage} />
+      </aside>
+      <main class="grid max-w-3xl flex-auto px-16 pt-8">
+        <slot />
+        <NextPrevious categories={categories} docs={docs} currentDoc={doc} />
+      </main>
+      <aside class="w-64 flex-none bg-emerald-200 lg:w-72">
+        <ActiveToC headings={headings} client:load />
+      </aside>
+    </div>
+    <footer class="mt-16 justify-center bg-rose-500">
+      <div class="mx-auto w-full max-w-8xl bg-emerald-400 py-4">d</div>
+    </footer>
+  </body>
+</html>
